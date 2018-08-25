@@ -20,7 +20,7 @@ function supervisorChoice() {
         {
             name: "action",
             type: "list",
-            message: "What would you like to do?",
+            message: "Select an Action",
             choices: ["View Product Sales by Department", "Create New Department"]
         }
     ])
@@ -36,9 +36,8 @@ function supervisorChoice() {
 }
 
 function productSales() {
-    var query = "SELECT department_id, department_name, over_head_costs, ";
-    query += "SUM(product_sales) AS product_sales, SUM(product_sales) - over_head_costs AS total_profit ";
-    query += "FROM departments INNER JOIN products USING (department_name) GROUP BY department_name";
+    var query = 
+    "SELECT department_id, department_name, over_head_costs, SUM(product_sales) AS product_sales, SUM(product_sales) - over_head_costs AS total_profit FROM departments INNER JOIN products USING (department_name) GROUP BY department_name";
 
     connection.query(query, function (err, res) {
         if (err) throw err;
@@ -80,7 +79,7 @@ function newDepartment() {
                 if (err) throw err;
             });
 
-            console.log("Your department has been added!");
+            console.log("Department has been added!");
             connection.end();
         })
 }
