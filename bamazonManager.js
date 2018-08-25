@@ -20,7 +20,10 @@ function managerOptions() {
             name: "action",
             type: "list",
             message: "What would you like to do?",
-            choices: ["View Products for Sale", "View Low Inventory", "Add to Inventory", "Add New Products"]
+            choices: ["View Products for Sale", 
+            "View Low Inventory", 
+            "Add to Inventory", 
+            "Add New Products"]
         }
     ])
         .then(function (answers) {
@@ -47,7 +50,11 @@ function viewProducts() {
         if (err) throw err;
 
         for (let i = 0; i < res.length; i++) {
-            console.log(`\nID: ${res[i].item_id}\n`, `Name: ${res[i].product_name}\n`, `Department: ${res[i].department_name}\n`, `Price: $${res[i].price}\n`, `Stock: ${res[i].stock_quantity}`);
+            console.log(`\nID: ${res[i].item_id}\n`, 
+            `Name: ${res[i].product_name}\n`, 
+            `Department: ${res[i].department_name}\n`, 
+            `Price: $${res[i].price}\n`, 
+            `Stock: ${res[i].stock_quantity}`);
         }
         connection.end();
     })
@@ -61,7 +68,11 @@ function lowInventory() {
 
         for (let i = 0; i < res.length; i++) {
             if (res[i].stock_quantity < 5) {
-                console.log(`\nID: ${res[i].item_id}\n`, `Name: ${res[i].product_name}\n`, `Department: ${res[i].department_name}\n`, `Price: $${res[i].price}\n`, `Stock: ${res[i].stock_quantity}`);
+                console.log(`\nID: ${res[i].item_id}\n`, 
+                `Name: ${res[i].product_name}\n`, 
+                `Department: ${res[i].department_name}\n`, 
+                `Price: $${res[i].price}\n`, 
+                `Stock: ${res[i].stock_quantity}`);
             }
         }
         connection.end();
@@ -144,7 +155,9 @@ function newProducts() {
         }
     ])
     .then(function(answers) {
-        var query = `INSERT INTO products (product_name, department_name, price, stock_quantity) VALUES ('${answers.name}', '${answers.department}', ${answers.price}, ${answers.amount});`;
+        var query = 
+        `INSERT INTO products (product_name, department_name, price, stock_quantity) 
+        VALUES ('${answers.name}', '${answers.department}', ${answers.price}, ${answers.amount});`;
 
         connection.query(query, function(err, res) {
             if (err) throw err;

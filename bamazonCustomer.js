@@ -20,7 +20,10 @@ function catalog() {
     connection.query(query, function (err, res) {
         if (err) throw err;
         for (let i = 0; i < res.length; i++) {
-            console.log(`\nID: ${res[i].item_id}\n`, `Name: ${res[i].product_name}\n`, `Department: ${res[i].department_name}\n`, `Price: $${res[i].price}`);
+            console.log(`\nID: ${res[i].item_id}\n`, 
+            `Name: ${res[i].product_name}\n`, 
+            `Department: ${res[i].department_name}\n`, 
+            `Price: $${res[i].price}`);
         }
         console.log(`\n-------------------`);
         customerChoice();
