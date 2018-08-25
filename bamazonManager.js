@@ -19,8 +19,8 @@ function managerOptions() {
         {
             name: "action",
             type: "list",
-            message: "What would you like to do?",
-            choices: ["View Products for Sale", 
+            message: "Select an Action",
+            choices: ["View Product Inventory", 
             "View Low Inventory", 
             "Add to Inventory", 
             "Add New Products"]
@@ -28,7 +28,7 @@ function managerOptions() {
     ])
         .then(function (answers) {
             switch (answers.action) {
-                case "View Products for Sale":
+                case "View Product Inventory":
                     return viewProducts();
 
                 case "View Low Inventory":
@@ -86,7 +86,9 @@ function addInventory() {
         if (err) throw err;
 
         for (let i = 0; i < res.length; i++) {
-            console.log(`\nID: ${res[i].item_id}\n`, `Name: ${res[i].product_name}`);
+            console.log(`\nID: ${res[i].item_id}\n`, 
+            `Name: ${res[i].product_name}\n`, 
+            `Stock: ${res[i].stock_quantity}`);
         }
         console.log(`\n-------------------`);
         orderForm(res);
@@ -97,7 +99,7 @@ function addInventory() {
             {
                 name: "item",
                 type: "input",
-                message: "Which product would you like to add more of? (Insert ID)",
+                message: "Select the product you would like to add (Insert ID)",
                 validate: function (value) {
                     if (isNaN(value) === false) {
                         return true
@@ -108,7 +110,7 @@ function addInventory() {
             {
                 name: "amount",
                 type: "input",
-                message: "How many more would you like to add?"
+                message: "How many would you like to add?"
             }
         ])
             .then(function (answers) {
@@ -119,7 +121,7 @@ function addInventory() {
                 connection.query(query, function (err, res) {
                     if (err) throw err;
 
-                    console.log("Stock has been successfully added!");
+                    console.log("Successfully added amount");
                     connection.end();
                 })
             })
@@ -162,7 +164,7 @@ function newProducts() {
         connection.query(query, function(err, res) {
             if (err) throw err;
 
-            console.log("You have successfully added the product!");
+            console.log("Successfully created the product!");
         })
         connection.end();
     })
